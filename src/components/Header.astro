@@ -1,0 +1,34 @@
+---
+---
+<div class="flex flex-row">
+    <span class="menu material-symbols-outlined">
+    menu
+    </span>
+    <nav>
+        <a href="/" class="link">Início</a>
+        <a href="/sobre" class="link">Sobre</a>
+        <a href="/soluções" class="link">Soluções</a>
+        <a href="/produtos" class="link">Produtos</a>
+        <a href="/clientes" class="link">Clientes</a>
+    </nav>
+</div>
+<style>
+    @import "tailwindcss";
+
+    .menu {
+        @apply mx-[16px]
+            inline-block sm:hidden
+            self-center;
+    }
+
+    nav {
+        @apply w-auto sm:w-full
+            flex flex-row flex-nowrap
+            justify-start sm:justify-center
+            overflow-hidden;
+    }
+
+    .link {
+        @apply shrink-0 mx-1 text-2xl;
+    }
+</style>
