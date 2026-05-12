@@ -4,32 +4,32 @@
     <button aria-controls="navigation" aria-expanded={false} data-navigation-button class="material-symbols-outlined">menu</button>
 </div>
 <nav id="navigation-menu" data-navigation-menu>
-    <a href="/" class="link">Início</a>
-    <a href="/sobre" class="link">Sobre</a>
-    <a href="/soluções" class="link">Soluções</a>
-    <a href="/produtos" class="link">Produtos</a>
-    <a href="/clientes" class="link">Clientes</a>
+    <a href="/">Início</a>
+    <a href="/sobre">Sobre</a>
+    <a href="/soluções">Soluções</a>
+    <a href="/produtos">Produtos</a>
+    <a href="/clientes">Clientes</a>
 </nav>
 <style>
     @import "tailwindcss";
 
     nav {
         @apply w-full
-            hidden sm:flex
+            hidden sm:flex sm:flex-row
             justify-center
-            overflow-hidden;
     }
 
     nav[data-navigation-menu="true"] {
-        @apply flex flex-col items-center
+        @apply flex flex-col
+            items-center
+    }
+
+    a {
+        @apply shrink-0 mx-1 text-2xl
     }
 
     nav[data-navigation-menu="true"] a {
-        @apply inline-block my-4
-    }
-
-    .link {
-        @apply shrink-0 mx-1 text-2xl;
+        @apply my-4
     }
 </style>
 <script>
