@@ -1,0 +1,45 @@
+---
+---
+<div class="m-4 flex sm:hidden">
+    <button aria-controls="navigation" aria-expanded={false} data-navigation-button class="material-symbols-outlined">menu</button>
+</div>
+<nav id="navigation-menu" data-navigation-menu>
+    <a href="/" class="link">Início</a>
+    <a href="/sobre" class="link">Sobre</a>
+    <a href="/soluções" class="link">Soluções</a>
+    <a href="/produtos" class="link">Produtos</a>
+    <a href="/clientes" class="link">Clientes</a>
+</nav>
+<style>
+    @import "tailwindcss";
+
+    nav {
+        @apply w-full
+            hidden sm:flex
+            justify-center
+            overflow-hidden;
+    }
+
+    nav[data-navigation-menu="true"] {
+        @apply flex flex-col items-center
+    }
+
+    nav[data-navigation-menu="true"] a {
+        @apply inline-block my-4
+    }
+
+    .link {
+        @apply shrink-0 mx-1 text-2xl;
+    }
+</style>
+<script>
+    const button = document.querySelector('[data-navigation-button]');
+    if (button) {
+        button?.addEventListener('click',() => {
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded',String(!isExpanded));
+            const menu = document.querySelector('[data-navigation-menu]');
+            menu?.setAttribute("data-navigation-menu",String(!isExpanded))
+        })
+    }
+</script>
