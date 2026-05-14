@@ -1,9 +1,21 @@
 ---
 ---
-<div class="m-4 flex sm:hidden">
-    <button aria-controls="navigation" aria-expanded={false} data-navigation-button class="material-symbols-outlined">menu</button>
-</div>
-<nav id="navigation-menu" data-navigation-menu>
+<nav class="flex p-[16px] justify-end md:justify-between">
+    <div class="hidden md:inline">
+        <a href="/">Indústrias ACME</a>
+    </div>
+    <div class="hidden md:flex">
+        <a href="/sobre">Sobre</a>
+        <a href="/soluções">Soluções</a>
+        <a href="/produtos">Produtos</a>
+        <a href="/clientes">Clientes</a>
+    </div>
+    <div class="block md:hidden">
+        <button aria-controls="navigation" aria-expanded={false}
+                class="material-symbols-outlined cursor-pointer">menu</button>
+    </div>
+</nav>
+<nav id="navigation" class="hidden items-end">
     <a href="/">Início</a>
     <a href="/sobre">Sobre</a>
     <a href="/soluções">Soluções</a>
@@ -13,33 +25,34 @@
 <style>
     @import "tailwindcss";
 
-    nav {
-        @apply w-full
-            hidden sm:flex sm:flex-row
-            justify-center
+    nav:has( button[aria-expanded="true"]) + nav {
+        @apply flex flex-col
     }
 
-    nav[data-navigation-menu="true"] {
-        @apply flex flex-col
-            items-center
+    nav:has( button[aria-expanded="true"]) + nav > a {
+        @apply p-[16px]
     }
 
     a {
-        @apply shrink-0 mx-1 text-2xl
-    }
-
-    nav[data-navigation-menu="true"] a {
-        @apply my-4
+        @apply shrink-0 mx-2 text-2xl
     }
 </style>
 <script>
-    const button = document.querySelector('[data-navigation-button]');
+    const button = document.querySelector("button")
     if (button) {
-        button?.addEventListener('click',() => {
-            const isExpanded = button.getAttribute('aria-expanded') === 'true';
-            button.setAttribute('aria-expanded',String(!isExpanded));
-            const menu = document.querySelector('[data-navigation-menu]');
-            menu?.setAttribute("data-navigation-menu",String(!isExpanded))
+        // botão acionado: virar "expandido" / "não-expandido"
+        button.addEventListener("click",() => {
+            const expanded = button.getAttribute("aria-expanded") === "true"
+            button.textContent = expanded ? "menu" : "menu_open"
+            button.setAttribute("aria-expanded",String(!expanded))
+        })
+        // largura mudou: possivelmente, reiniciar o botão
+        window.addEventListener("resize",() => {
+            const rem = parseFloat( getComputedStyle(document.documentElement).fontSize )
+            if (window.innerWidth >= 48 * rem) {
+                button.textContent = "menu"
+                button.setAttribute("aria-expanded","false")
+            }
         })
     }
 </script>
